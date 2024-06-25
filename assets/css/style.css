@@ -1,0 +1,184 @@
+@charset "UTF-8";
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";
+
+@layer base {
+
+  html,
+  body {
+    @apply font-body;
+  }
+
+  h1,
+  .h1,
+  h2,
+  .h2,
+  h3,
+  .h3,
+  h4,
+  .h4,
+  h5,
+  .h5,
+  h6,
+  .h6 {
+    @apply font-bold leading-[1.3];
+  }
+
+  h1,
+  .h1 {
+    @apply text-[28px] leading-[1.2] sm:text-[32px] md:text-[35px] lg:text-[45px] xl:text-[64px];
+  }
+
+  h2,
+  .h2 {
+    @apply text-[26px] sm:text-[28px] md:text-[34px] lg:text-[38px] xl:text-[40px] leading-[1.2];
+  }
+
+  h3,
+  .h3 {
+    @apply text-[24px];
+  }
+
+  h4,
+  .h4 {
+    @apply text-[20px];
+  }
+
+  h5,
+  .h5 {
+    @apply text-[18px];
+  }
+
+  h6,
+  .h6 {
+    @apply text-[16px];
+  }
+
+  a,
+  button {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  p {
+    @apply mb-4;
+
+    &:last-child {
+      @apply mb-0;
+    }
+  }
+
+  input:is([type="email"]) {
+    @apply focus:outline-none;
+  }
+}
+
+@layer components {
+  .section {
+    @apply relative;
+  }
+
+  .container {
+    @apply max-w-[1710px];
+  }
+
+  .row {
+    @apply flex flex-wrap -mx-[15px];
+  }
+
+  .t-transition {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  .btn {
+    @apply border leading-none font-semibold inline-flex rounded-[10px] 2xl:py-[19px] lg:py-4 py-3 2xl:px-[46px] lg:px-9 px-7 text-base lg:text-xl 2xl:text-[26px] t-transition;
+  }
+
+  .btn.btn-sm {
+    @apply text-base 2xl:text-2xl lg:text-xl 2xl:px-[42px] lg:px-9 px-6 2xl:py-[17px] lg:py-3 py-2;
+  }
+
+  .btn.btn-primary {
+    @apply bg-primary border-primary text-grey-900;
+  }
+
+  .btn.btn-primary:is(:hover, :focus, :active) {
+    @apply bg-secondary border-secondary text-white;
+  }
+
+  .btn.btn-secondary {
+    @apply bg-secondary-800 border-secondary-800 text-white;
+  }
+
+  .btn.btn-secondary:is(:hover, :focus, :active) {
+    @apply bg-primary border-primary text-white;
+  }
+
+  .title .line {
+    @apply relative;
+  }
+
+  .title .line::after {
+    @apply content-[''] absolute left-0 bottom-0 h-[6px] w-16 bg-primary rounded-xl;
+  }
+}
+
+.circle {
+  width: 118px;
+  background: #fff;
+  margin-top: 36px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.circle::before {
+  content: "";
+  position: absolute;
+  width: 164px;
+  height: 164px;
+  top: 18px;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  border: 30px solid transparent;
+  border-bottom-color: #fff;
+  border-radius: 100%;
+  box-sizing: content-box;
+}
+
+.nz-cursor {
+  @apply text-primary pointer-events-none fixed top-0 left-0 z-[250];
+}
+
+.nz-cursor:before {
+  @apply content-[''] absolute -top-6 -left-6 w-12 h-12 block scale-[0.2] bg-current rounded-full transition-all duration-[0.4s];
+}
+
+.nz-cursor-text {
+  @apply absolute -top-[18px] -left-[18px] w-9 h-9 flex items-center justify-center text-base text-white text-center transition-[opacity_0.4s_transform_0.3s] scale-0;
+}
+
+.nz-cursor.-text {
+  @apply text-black;
+}
+
+.nz-cursor.-text .nz-cursor-text {
+  @apply opacity-100 scale-100;
+}
+
+.nz-cursor.-text:before {
+  @apply opacity-100 scale-[1.9]
+}
+
+.nz-cursor.-hidden:before {
+  @apply scale-0;
+}
+
+.nz-cursor.-pointer:not(.-text) {
+  @apply text-black;
+}
+
+.nz-cursor.-pointer:not(.-text):before {
+  @apply opacity-10 scale-[1.8];
+}
