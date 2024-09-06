@@ -1,62 +1,85 @@
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+gsap.registerPlugin(ScrollTrigger);
 
-const circle = document.querySelector('.nz-circle');
-        // Create ScrollSmoother
-        const smoother = ScrollSmoother.create({
-            content: "#scrollsmoother-container",
-            smooth: 2,
-            normalizeScroll: true,
-            ignoreMobileResize: true,
-            smoothTouch: 0.1,
-            effects: true,
-        });
+const circle = document.querySelector(".nz-circle");
+
+const lenis = new Lenis({
+  duration: 2.5,
+});
+
+lenis.on("scroll", (e) => {
+  // console.log(e);
+});
+
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+
+requestAnimationFrame(raf);
+
+// Create ScrollSmoother
+// const smoother = ScrollSmoother.create({
+//     content: "#scrollsmoother-container",
+//     smooth: 2,
+//     normalizeScroll: true,
+//     ignoreMobileResize: true,
+//     smoothTouch: 0.1,
+//     effects: true,
+// });
 
 // mouse
-var cursor = new MouseFollower(
-  {
-    el: null,
-    container: document.body,
-    className: 'nz-cursor',
-    innerClassName: 'nz-cursor-inner',
-    textClassName: 'nz-cursor-text',
-    mediaClassName: 'nz-cursor-media',
-    mediaBoxClassName: 'nz-cursor-media-box',
-    skewing: 1.5,
-    skewingMedia: 0.5,
-    // stateDetection: {
-    //   'hidden': ['.hide-cursor'] 
-    // }
-  }
-);
+var cursor = new MouseFollower({
+  el: null,
+  container: document.body,
+  className: "nz-cursor",
+  innerClassName: "nz-cursor-inner",
+  textClassName: "nz-cursor-text",
+  mediaClassName: "nz-cursor-media",
+  mediaBoxClassName: "nz-cursor-media-box",
+  skewing: 1.5,
+  skewingMedia: 0.5,
+  // stateDetection: {
+  //   'hidden': ['.hide-cursor']
+  // }
+});
 
-// svg 
-document.addEventListener('DOMContentLoaded', function () {
-  const svgImages = document.querySelectorAll('img.svg');
+// svg
+document.addEventListener("DOMContentLoaded", function () {
+  const svgImages = document.querySelectorAll("img.svg");
   svgImages.forEach(function (img) {
-      const imgID = img.getAttribute('id');
-      const imgClass = img.getAttribute('class');
-      const imgURL = img.getAttribute('src');
+    const imgID = img.getAttribute("id");
+    const imgClass = img.getAttribute("class");
+    const imgURL = img.getAttribute("src");
 
-      const xhr = new XMLHttpRequest();
-      xhr.open('GET', imgURL, true);
-      xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-              const svgContent = xhr.responseXML.querySelector('svg');
-              if (imgID) {
-                  svgContent.setAttribute('id', imgID);
-              }
-              if (imgClass) {
-                  svgContent.setAttribute('class', `${imgClass} replaced-svg`);
-              }
-              svgContent.removeAttribute('xmlns:a');
-              if (!svgContent.getAttribute('viewBox') && svgContent.getAttribute('height') && svgContent.getAttribute('width')) {
-                  svgContent.setAttribute('viewBox', `0 0 ${svgContent.getAttribute('height')} ${svgContent.getAttribute('width')}`);
-              }
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", imgURL, true);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        const svgContent = xhr.responseXML.querySelector("svg");
+        if (imgID) {
+          svgContent.setAttribute("id", imgID);
+        }
+        if (imgClass) {
+          svgContent.setAttribute("class", `${imgClass} replaced-svg`);
+        }
+        svgContent.removeAttribute("xmlns:a");
+        if (
+          !svgContent.getAttribute("viewBox") &&
+          svgContent.getAttribute("height") &&
+          svgContent.getAttribute("width")
+        ) {
+          svgContent.setAttribute(
+            "viewBox",
+            `0 0 ${svgContent.getAttribute("height")} ${svgContent.getAttribute(
+              "width"
+            )}`
+          );
+        }
 
-              img.parentNode.replaceChild(svgContent, img);
-          }
-      };
-      xhr.send();
+        img.parentNode.replaceChild(svgContent, img);
+      }
+    };
+    xhr.send();
   });
 });
 
@@ -66,7 +89,7 @@ var clientLogo = new Swiper(".client-logo", {
   autoplay: {
     delay: 2500,
     disableOnInteraction: false,
-    reverseDirection:true,
+    reverseDirection: true,
   },
 });
 
@@ -85,6 +108,6 @@ var clientLogoSwiper = new Swiper(".client-slider", {
     768: {
       slidesPerView: 4,
       spaceBetween: 30,
-    }
+    },
   },
 });
